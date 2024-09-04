@@ -1,0 +1,49 @@
+2024-06-29 14:18:47
+Typ splatky: rocna
+Pozicana suma: 10000 EUR
+Urokova sadzba: 5 %
+Casove obdobie: 1 rokov
+Pocet mesiacov: 12
+-------------------------------
+2024-06-29 14:19:27
+Typ splatky: rocna
+Pozicana suma: 10000 EUR
+Urokova sadzba: 5 %
+Casove obdobie: 1 rokov
+Pocet mesiacov: 7
+-------------------------------
+2024-06-29 14:20:04
+Typ splatky: rocna
+Pozicana suma: 10000 EUR
+Urokova sadzba: 5 %
+Casove obdobie: 0 rokov
+Pocet mesiacov: 7
+-------------------------------
+2024-06-29 14:27:05
+Typ splatky: rocna
+Pozicana suma: 10000 EUR
+Urokova sadzba: 5 %
+Casove obdobie: 1 rokov
+Pocet mesiacov: 12
+-------------------------------
+2024-08-18 13:01:20
+Typ splatky: rocna
+Pozicana suma: 3 EUR
+Urokova sadzba: 5 %
+Casove obdobie: 2 rokov
+Pocet mesiacov: 24
+-------------------------------
+2024-09-04 10:11:03
+Typ splatky: mesacna
+Pozicana suma: 120000 EUR
+Urokova sadzba: 3 %
+Casove obdobie: 2 rokov
+Pocet mesiacov: 24
+-------------------------------
+2024-09-04 10:19:49
+Typ splatky: rocna
+Pozicana suma: 100 EUR
+Urokova sadzba: 4 %
+Casove obdobie: 3 rokov
+Pocet mesiacov: 36
+-------------------------------
