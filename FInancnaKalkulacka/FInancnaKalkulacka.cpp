@@ -7,218 +7,218 @@
 using namespace std;
 
 /**
- * Trieda Calculator poskytuje funkcie na výpočty spojené s úrokmi, splátkami a investíciami.
+ * The Calculator class provides functions for interest, payment, and investment calculations.
  */
 class Calculator {
 private:
-    bool jeRocna; // Indikuje, či sú splátky ročné (true) alebo nie (false)
-    bool jeMesacna; // Indikuje, či sú splátky mesačné (true) alebo nie (false)
-    double casoveObdobie; // Časové obdobie v rokoch
-    string typSplatky; // Typ splátky
-    double pozicanaSuma; // Pozičaná suma
-    double urokovaSadzba; // Úroková sadzba
-    int pocetMesiacov; // Počet mesiacov
-    double urokovaSadzbaNaInvesticie; // Úroková sadzba na investície
-    double investovanaSuma; // Investovaná suma
+    bool isAnnual; // Indicates whether the payments are annual (true) or not (false)
+    bool isMonthly; // Indicates whether the payments are monthly (true) or not (false)
+    double timePeriod; // Time period in years
+    string paymentType; // Type of payment
+    double borrowedAmount; // Borrowed amount
+    double interestRate; // Interest rate
+    int numberOfMonths; // Number of months
+    double investmentInterestRate; // Interest rate on investments
+    double investedAmount; // Invested amount
 
 public:
     /**
-     * Konštruktor triedy Calculator.
-     * @param jeRocna Indikuje, či sú splátky ročné.
-     * @param jeMesacna Indikuje, či sú splátky mesačné.
-     * @param urokovaSadzba Úroková sadzba pre pôžičky.
-     * @param casoveObdobie Časové obdobie v rokoch.
-     * @param typSplatky Typ splátky.
-     * @param pozicanaSuma Pozičaná suma.
-     * @param pocetMesiacov Počet mesiacov pre splátky.
-     * @param urokovaSadzbaNaInvesticie Úroková sadzba na investície.
-     * @param investovanaSuma Investovaná suma.
+     * Constructor for the Calculator class.
+     * @param isAnnual Indicates whether the payments are annual.
+     * @param isMonthly Indicates whether the payments are monthly.
+     * @param interestRate Interest rate for loans.
+     * @param timePeriod Time period in years.
+     * @param paymentType Type of payment.
+     * @param borrowedAmount Borrowed amount.
+     * @param numberOfMonths Number of months for payments.
+     * @param investmentInterestRate Interest rate on investments.
+     * @param investedAmount Invested amount.
      */
-    Calculator(bool jeRocna, bool jeMesacna, double urokovaSadzba, double casoveObdobie, string typSplatky, double pozicanaSuma, int pocetMesiacov, double urokovaSadzbaNaInvesticie, double investovanaSuma) {
-        this->jeRocna = jeRocna;
-        this->jeMesacna = jeMesacna;
-        this->urokovaSadzba = urokovaSadzba;
-        this->casoveObdobie = casoveObdobie;
-        this->typSplatky = typSplatky;
-        this->pozicanaSuma = pozicanaSuma;
-        this->pocetMesiacov = pocetMesiacov;
-        this->urokovaSadzbaNaInvesticie = urokovaSadzbaNaInvesticie;
-        this->investovanaSuma = investovanaSuma;
+    Calculator(bool isAnnual, bool isMonthly, double interestRate, double timePeriod, string paymentType, double borrowedAmount, int numberOfMonths, double investmentInterestRate, double investedAmount) {
+        this->isAnnual = isAnnual;
+        this->isMonthly = isMonthly;
+        this->interestRate = interestRate;
+        this->timePeriod = timePeriod;
+        this->paymentType = paymentType;
+        this->borrowedAmount = borrowedAmount;
+        this->numberOfMonths = numberOfMonths;
+        this->investmentInterestRate = investmentInterestRate;
+        this->investedAmount = investedAmount;
     }
 
     /**
-     * Získa časové obdobie v rokoch.
-     * @return Časové obdobie.
+     * Returns the time period in years.
+     * @return Time period.
      */
-    double getCasoveObdobie() {
-        return this->casoveObdobie;
+    double getTimePeriod() {
+        return this->timePeriod;
     }
 
     /**
-     * Získa typ splátky.
-     * @return Typ splátky.
+     * Returns the type of payment.
+     * @return Payment type.
      */
-    string getTypSplatky() {
-        return this->typSplatky;
+    string getPaymentType() {
+        return this->paymentType;
     }
 
     /**
-     * Získa pozičanú sumu.
-     * @return Pozičaná suma.
+     * Returns the borrowed amount.
+     * @return Borrowed amount.
      */
-    double getPozicanaSuma() {
-        return this->pozicanaSuma;
+    double getBorrowedAmount() {
+        return this->borrowedAmount;
     }
 
     /**
-     * Vypočíta jednoduché úroky.
-     * @return Jednoduché úroky.
+     * Calculates simple interest.
+     * @return Simple interest.
      */
-    double vypocetUrokov() {
-        return this->pozicanaSuma * urokovaSadzba * casoveObdobie;
+    double calculateSimpleInterest() {
+        return this->borrowedAmount * interestRate * timePeriod;
     }
 
     /**
-     * Vypočíta zložené úroky.
-     * @return Zložené úroky.
+     * Calculates compound interest.
+     * @return Compound interest.
      */
-    double vypocetZlozitychUrokov() {
-        return this->pozicanaSuma * pow(1 + urokovaSadzba, this->casoveObdobie);
+    double calculateCompoundInterest() {
+        return this->borrowedAmount * pow(1 + interestRate, this->timePeriod);
     }
 
     /**
-     * Vypočíta výšku splátky na základe zvolených parametrov.
-     * @return Výška splátky.
+     * Calculates the payment amount based on the selected parameters.
+     * @return Payment amount.
      */
-    double vypocetSplatky() {
-        if (this->jeRocna) {
-            return this->pozicanaSuma * this->urokovaSadzba / 12;
+    double calculatePayment() {
+        if (this->isAnnual) {
+            return this->borrowedAmount * this->interestRate / 12;
         } else {
-            return this->pozicanaSuma * urokovaSadzba / this->pocetMesiacov;
+            return this->borrowedAmount * interestRate / this->numberOfMonths;
         }
     }
 
     /**
-     * Vypočíta výnos z investícií.
-     * @return Výnos z investícií.
+     * Calculates the return on investment.
+     * @return Return on investment.
      */
-    double vypocetNaInvesticie() {
-        return this->investovanaSuma * this->pocetMesiacov * this->urokovaSadzbaNaInvesticie;
+    double calculateInvestmentReturn() {
+        return this->investedAmount * this->numberOfMonths * this->investmentInterestRate;
     }
 
     /**
-     * Uloží údaje do súboru.
-     * @param nazovSuboru Názov súboru, do ktorého sa údaje uložia.
+     * Saves data to a file.
+     * @param filename Name of the file where data will be saved.
      */
-    void vlozDoSuboru(string nazovSuboru) {
-        ofstream outputfile(nazovSuboru, ios::app);
+    void saveToFile(string filename) {
+        ofstream outputFile(filename, ios::app);
 
-        if (outputfile.is_open()) {
-            // Získanie aktuálneho času
+        if (outputFile.is_open()) {
+            // Get the current time
             time_t now = time(0);
             tm *ltm = std::localtime(&now);
 
-            // Formátovanie času na reťazec
-            char datumCas[30];
-            strftime(datumCas, sizeof(datumCas), "%Y-%m-%d %H:%M:%S", ltm);
+            // Format the time as a string
+            char dateTime[30];
+            strftime(dateTime, sizeof(dateTime), "%Y-%m-%d %H:%M:%S", ltm);
 
-            // Zápis údajov do súboru
-            outputfile << datumCas << endl;
-            outputfile << "Typ splatky: " << typSplatky << endl;
-            outputfile << "Pozicana suma: " << pozicanaSuma << " EUR" << endl;
-            outputfile << "Urokova sadzba: " << urokovaSadzba * 100 << " %" << endl;
-            outputfile << "Casove obdobie: " << casoveObdobie << " rokov" << endl;
-            outputfile << "Pocet mesiacov: " << pocetMesiacov << endl;
-            outputfile << "-------------------------------" << endl;
+            // Write the data to the file
+            outputFile << dateTime << endl;
+            outputFile << "Payment type: " << paymentType << endl;
+            outputFile << "Borrowed amount: " << borrowedAmount << " EUR" << endl;
+            outputFile << "Interest rate: " << interestRate * 100 << " %" << endl;
+            outputFile << "Time period: " << timePeriod << " years" << endl;
+            outputFile << "Number of months: " << numberOfMonths << endl;
+            outputFile << "-------------------------------" << endl;
 
-            outputfile.close();
+            outputFile.close();
         } else {
-            cerr << "\033[31mChyba pri otvarani suboru: " << nazovSuboru << "\033[0m" << endl;
+            cerr << "\033[31mError opening file: " << filename << "\033[0m" << endl;
         }
     }
 
     /**
-     * Číta údaje zo súboru a vypisuje ich na konzolu.
-     * @param nazovSuboru Názov súboru, z ktorého sa údaje čítajú.
+     * Reads data from a file and prints it to the console.
+     * @param filename Name of the file to read data from.
      */
-    void citajZoSuboru(string nazovSuboru) {
-        ifstream inputfile(nazovSuboru);
+    void readFromFile(string filename) {
+        ifstream inputFile(filename);
 
-        if (inputfile.is_open()) {
+        if (inputFile.is_open()) {
             string line;
-            while (getline(inputfile, line)) {
+            while (getline(inputFile, line)) {
                 cout << "\033[32m" << line << "\033[0m" << endl;
             }
-            inputfile.close();
+            inputFile.close();
         } else {
-            cerr << "\033[31mChyba pri otvarani suboru: " << nazovSuboru << "\033[0m" << endl;
+            cerr << "\033[31mError opening file: " << filename << "\033[0m" << endl;
         }
     }
 };
 
 /**
- * Vytlačí nadpis v okne s farbami.
- * @param text Text nadpisu.
+ * Prints a title with colors.
+ * @param text Title text.
  */
-void vypisNadpis(const string &text) {
+void printTitle(const string &text) {
     cout << "\033[34m╔══════════════════════════════════════════╗\033[0m" << endl;
-    cout << "\033[34m║\033[0m " << text << "\033[34m \033[34m║\033[0m" << endl;
+    cout << "\033[34m║\033[0m " << text << " \033[34m║\033[0m" << endl;
     cout << "\033[34m╚══════════════════════════════════════════╝\033[0m" << endl;
 }
 
 int main() {
-    // Vytlačenie nadpisu
-    vypisNadpis("Kalkulacka financnych operacii");
+    // Print the title
+    printTitle("Financial Operations Calculator");
 
-    // Deklarácia premenných pre vstup od používateľa
-    bool jeRocna, jeMesacna;
-    double urokovaSadzba, casoveObdobie, pozicanaSuma, urokovaSadzbaNaInvesticie, investovanaSuma;
-    int pocetMesiacov;
-    string typSplatky;
+    // Declare variables for user input
+    bool isAnnual, isMonthly;
+    double interestRate, timePeriod, borrowedAmount, investmentInterestRate, investedAmount;
+    int numberOfMonths;
+    string paymentType;
 
-    // Vstup od používateľa
-    cout << "\033[33mZadajte, ci je splatka rocna (1 = ano, 0 = nie): \033[0m";
-    cin >> jeRocna;
-    cout << "\033[33mZadajte, ci je splatka mesacna (1 = ano, 0 = nie): \033[0m";
-    cin >> jeMesacna;
-    cout << "\033[33mZadajte urokovu sadzbu (napr. 0.05 pre 5%): \033[0m";
-    cin >> urokovaSadzba;
-    cout << "\033[33mZadajte casove obdobie v rokoch: \033[0m";
-    cin >> casoveObdobie;
-    cout << "\033[33mZadajte typ splatky: \033[0m";
-    cin >> typSplatky;
-    cout << "\033[33mZadajte pozicanu sumu: \033[0m";
-    cin >> pozicanaSuma;
-    cout << "\033[33mZadajte pocet mesiacov: \033[0m";
-    cin >> pocetMesiacov;
-    cout << "\033[33mZadajte urokovu sadzbu na investicie (napr. 0.035 pre 3.5%): \033[0m";
-    cin >> urokovaSadzbaNaInvesticie;
-    cout << "\033[33mZadajte investovanu sumu: \033[0m";
-    cin >> investovanaSuma;
+    // User input
+    cout << "\033[33mEnter if the payment is annual (1 = yes, 0 = no): \033[0m";
+    cin >> isAnnual;
+    cout << "\033[33mEnter if the payment is monthly (1 = yes, 0 = no): \033[0m";
+    cin >> isMonthly;
+    cout << "\033[33mEnter the interest rate (e.g., 0.05 for 5%): \033[0m";
+    cin >> interestRate;
+    cout << "\033[33mEnter the time period in years: \033[0m";
+    cin >> timePeriod;
+    cout << "\033[33mEnter the payment type: \033[0m";
+    cin >> paymentType;
+    cout << "\033[33mEnter the borrowed amount: \033[0m";
+    cin >> borrowedAmount;
+    cout << "\033[33mEnter the number of months: \033[0m";
+    cin >> numberOfMonths;
+    cout << "\033[33mEnter the interest rate on investments (e.g., 0.035 for 3.5%): \033[0m";
+    cin >> investmentInterestRate;
+    cout << "\033[33mEnter the invested amount: \033[0m";
+    cin >> investedAmount;
 
-    // Vytvorenie objektu Calculator s poskytnutými údajmi
-    Calculator kalkulator(jeRocna, jeMesacna, urokovaSadzba, casoveObdobie, typSplatky, pozicanaSuma, pocetMesiacov, urokovaSadzbaNaInvesticie, investovanaSuma);
+    // Create a Calculator object with the provided data
+    Calculator calculator(isAnnual, isMonthly, interestRate, timePeriod, paymentType, borrowedAmount, numberOfMonths, investmentInterestRate, investedAmount);
 
-    // Výpis informácií o kalkuláciách
-    cout << "\033[32mCasove obdobie: \033[0m" << kalkulator.getCasoveObdobie() << " rokov" << endl;
-    cout << "\033[32mTyp splatky: \033[0m" << kalkulator.getTypSplatky() << endl;
-    cout << "\033[32mPozicana suma: \033[0m" << kalkulator.getPozicanaSuma() << " EUR" << endl;
+    // Output calculation results
+    cout << "\033[32mTime period: \033[0m" << calculator.getTimePeriod() << " years" << endl;
+    cout << "\033[32mPayment type: \033[0m" << calculator.getPaymentType() << endl;
+    cout << "\033[32mBorrowed amount: \033[0m" << calculator.getBorrowedAmount() << " EUR" << endl;
 
-    double uroky = kalkulator.vypocetUrokov();
-    cout << "\033[32mJednoduchy urok: \033[0m" << uroky << " EUR" << endl;
+    double simpleInterest = calculator.calculateSimpleInterest();
+    cout << "\033[32mSimple interest: \033[0m" << simpleInterest << " EUR" << endl;
 
-    double zloziteUroky = kalkulator.vypocetZlozitychUrokov();
-    cout << "\033[32mZlozeny urok: \033[0m" << zloziteUroky << " EUR" << endl;
+    double compoundInterest = calculator.calculateCompoundInterest();
+    cout << "\033[32mCompound interest: \033[0m" << compoundInterest << " EUR" << endl;
 
-    double splatka = kalkulator.vypocetSplatky();
-    cout << "\033[32mSplatka: \033[0m" << splatka << " EUR mesacne" << endl;
+    double payment = calculator.calculatePayment();
+    cout << "\033[32mPayment: \033[0m" << payment << " EUR monthly" << endl;
 
-    double investicia = kalkulator.vypocetNaInvesticie();
-    cout << "\033[32mVynos z investicii: \033[0m" << investicia << " EUR" << endl;
+    double investmentReturn = calculator.calculateInvestmentReturn();
+    cout << "\033[32mInvestment return: \033[0m" << investmentReturn << " EUR" << endl;
 
-    // Uloženie údajov do súboru a čítanie zo súboru
-    kalkulator.vlozDoSuboru("Zoznam.txt");
-    kalkulator.citajZoSuboru("Zoznam.txt");
+    // Save data to file and read it back
+    calculator.saveToFile("List.txt");
+    calculator.readFromFile("List.txt");
 
     return 0;
 }
