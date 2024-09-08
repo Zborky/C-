@@ -4,44 +4,44 @@
 using namespace std;
 
 /**
- * Funkcia DFS prehľadá graf do hĺbky z východiskového vrcholu.
- * 
- * Parametre:
- * - graph: Adjacency list reprezentácia grafu, kde graph[u] obsahuje zoznam susedov vrcholu u.
- * - vertex: Aktuálny vrchol, ktorý sa prehľadáva.
- * - visited: Vektor boolean hodnôt, ktorý sleduje, ktoré vrcholy boli navštívené.
- * - order: Vektor vrcholov v poradí, v akom boli navštívené DFS.
+ * Performs a Depth-First Search (DFS) on a graph starting from a given vertex.
+ *
+ * Parameters:
+ * - graph: An adjacency list representation of the graph, where graph[u] contains a list of neighbors of vertex u.
+ * - vertex: The current vertex being explored.
+ * - visited: A boolean vector tracking which vertices have been visited.
+ * - order: A vector storing the order in which vertices are visited during DFS.
  */
 void DFS(const vector<vector<int>>& graph, int vertex, vector<bool>& visited, vector<int>& order) {
-    visited[vertex] = true; // Označi vrchol ako navštívený
-    order.push_back(vertex); // Pridá vrchol do poradia navštívených vrcholov
+    visited[vertex] = true; // Mark the vertex as visited
+    order.push_back(vertex); // Add the vertex to the order of visited vertices
 
-    // Pre všetkých susedov aktuálneho vrcholu
+    // For all neighbors of the current vertex
     for (int neighbor : graph[vertex]) {
         if (!visited[neighbor]) {
-            DFS(graph, neighbor, visited, order); // Rekurzívne zavolá DFS pre nenavštíveného suseda
+            DFS(graph, neighbor, visited, order); // Recursively call DFS for the unvisited neighbor
         }
     }
 }
 
 int main() {
-    // Príklad grafu reprezentovaného adjacency listom
+    // Example graph represented as an adjacency list
     vector<vector<int>> graph = {
-        {1, 2},    // susedia vrcholu 0
-        {0, 3, 4}, // susedia vrcholu 1
-        {0, 4},    // susedia vrcholu 2
-        {1, 5},    // susedia vrcholu 3
-        {1, 2, 5}, // susedia vrcholu 4
-        {3, 4}     // susedia vrcholu 5
+        {1, 2}, // Neighbors of vertex 0
+        {0, 3, 4}, // Neighbors of vertex 1
+        {0, 4}, // Neighbors of vertex 2
+        {1, 5}, // Neighbors of vertex 3
+        {1, 2, 5}, // Neighbors of vertex 4
+        {3, 4} // Neighbors of vertex 5
     };
 
-    int startVertex = 0; // Východiskový vrchol
-    vector<bool> visited(graph.size(), false); // Vektor, ktorý sleduje, či bol vrchol navštívený
-    vector<int> dfsOrder; // Poradie navštívených vrcholov
+    int startVertex = 0; // Starting vertex
+    vector<bool> visited(graph.size(), false); // Vector to keep track of visited vertices
+    vector<int> dfsOrder; // Order of visited vertices
 
     DFS(graph, startVertex, visited, dfsOrder);
 
-    cout << "Poradie navštívených vrcholov: ";
+    cout << "Order of visited vertices: ";
     for (int vertex : dfsOrder) {
         cout << vertex << " ";
     }
