@@ -3,58 +3,58 @@
 using namespace std;
 
 /*
- * Tento program implementuje algoritmus triedenia zlúčením na usporiadanie poľa celých čísel.
- * Zlúčené triedenie je algoritmus "rozdeli a panuj", ktorý rozdeľuje pole na dve polovice,
- * rekurzívne triedi každú polovicu a potom zlúči dve usporiadané polovice do jedného usporiadaného poľa.
+ * This program implements the Merge Sort algorithm to sort an array of integers.
+ * Merge Sort is a "divide and conquer" algorithm that splits the array into two halves,
+ * recursively sorts each half, and then merges the two sorted halves into one sorted array.
  */
 
-class MergeSort{
+class MergeSort {
     private:
-    // Pomocná funkcia, ktorá rekurzívne triedi pole
-    void mergeSort(int array[], int left, int right){
-        if(left < right){
-            // Nájdite stredný bod na rozdelenie poľa na dve polovice
+    // Helper function that recursively sorts the array
+    void mergeSort(int array[], int left, int right) {
+        if(left < right) {
+            // Find the middle point to divide the array into two halves
             int mid = left + (right - left) / 2;
 
-            // Volajte mergeSort na prvú polovicu
+            // Call mergeSort on the first half
             mergeSort(array, left, mid);
 
-            // Volajte mergeSort na druhú polovicu
+            // Call mergeSort on the second half
             mergeSort(array, mid + 1, right);
 
-            // Zlúčte dve polovice usporiadané v predchádzajúcich krokoch
+            // Merge the two halves sorted in the previous steps
             merge(array, mid, left, right);
         }
     }
 
     public:
-    // Táto funkcia inicializuje proces triedenia zlúčením
-    void sort(int array[], int n){
+    // This function initializes the merge sort process
+    void sort(int array[], int n) {
         mergeSort(array, 0, n - 1);
     }
 
-    // Táto funkcia zlúči dve polovice poľa
-    void merge(int array[], int mid, int left, int right){
-        int n1 = mid - left + 1;  // Veľkosť prvej polovice
-        int n2 = right - mid;     // Veľkosť druhej polovice
+    // This function merges two halves of the array
+    void merge(int array[], int mid, int left, int right) {
+        int n1 = mid - left + 1;  // Size of the first half
+        int n2 = right - mid;     // Size of the second half
 
-        // Dočasné polia na uloženie dvoch polovíc
+        // Temporary arrays to store two halves
         int L[n1], R[n2];
 
-        // Skopírujte údaje do dočasných polí L[] a R[]
-        for(int i = 0; i < n1; i++){
+        // Copy data to temporary arrays L[] and R[]
+        for(int i = 0; i < n1; i++) {
             L[i] = array[left + i];
         }
-        for(int i = 0; i < n2; i++){
+        for(int i = 0; i < n2; i++) {
             R[i] = array[mid + 1 + i];
         }
 
-        // Počiatočné indexy pre dve podpolia a zlúčené pole
+        // Initial indexes for the two subarrays and the merged array
         int i = 0, j = 0, k = left;
 
-        // Zlúčte dočasné polia späť do array[left..right]
-        while(i < n1 && j < n2){
-            if(L[i] <= R[j]){
+        // Merge the temporary arrays back into array[left..right]
+        while(i < n1 && j < n2) {
+            if(L[i] <= R[j]) {
                 array[k] = L[i];
                 i++;
             } else {
@@ -64,15 +64,15 @@ class MergeSort{
             k++;
         }
 
-        // Skopírujte zostávajúce prvky L[], ak nejaké sú
-        while(i < n1){
+        // Copy the remaining elements of L[], if any
+        while(i < n1) {
             array[k] = L[i];
             i++;
             k++;
         }
 
-        // Skopírujte zostávajúce prvky R[], ak nejaké sú
-        while(j < n2){
+        // Copy the remaining elements of R[], if any
+        while(j < n2) {
             array[k] = R[j];
             j++;
             k++;
@@ -80,17 +80,18 @@ class MergeSort{
     }
 };
 
-int main(){
+int main() {
+    // Example array to be sorted
     int array[] = {5, 2, 4, 1, 3};
     int n = sizeof(array) / sizeof(array[0]);
 
+    // Create an object of the MergeSort class
     MergeSort sorter;
-    sorter.sort(array, n);
+    sorter.sort(array, n);  // Sort the array
 
-    // Vytlačte usporiadané pole
-    for(int i = 0; i < n; i++){
-        cout << array[i] << " ";
+    // Print the sorted array
+    for(int i = 0; i < n; i++) {
+        cout << array[i] << " ";  // Output each element of the sorted array
     }
     return 0;
 }
-
