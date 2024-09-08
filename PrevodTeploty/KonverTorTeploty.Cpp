@@ -1,41 +1,45 @@
 #include <iostream>
 using namespace std;
 
-// Funkcia na konverziu z Celzia na Fahrenheit
+// Function to convert Celsius to Fahrenheit
 double celsiusToFahrenheit(double celsius) {
-    return (celsius * 9 / 5) + 32;
+    return (celsius * 9 / 5) + 32; // Conversion formula
 }
 
-// Funkcia na konverziu z Fahrenheit na Celzia
+// Function to convert Fahrenheit to Celsius
 double fahrenheitToCelsius(double fahrenheit) {
-    return (fahrenheit - 32) * 5 / 9;
+    return (fahrenheit - 32) * 5 / 9; // Conversion formula
 }
 
 int main() {
-    char volba;
-    double teplota;
+    char choice; // Variable to store user's choice
+    double temperature; // Variable to store the temperature value entered by the user
 
-    cout << "Vyber si moznost konverzie:" << endl;
+    // Display the conversion options to the user
+    cout << "Choose a conversion option:" << endl;
     cout << "a. Celsius -> Fahrenheit" << endl;
     cout << "b. Fahrenheit -> Celsius" << endl;
-    cout << "Tvoja volba: ";
-    cin >> volba;
+    cout << "Your choice: ";
+    cin >> choice; // Get the user's choice
 
-    switch (volba) {
-        case 'a':
-            cout << "Zadaj teplotu v stupnoch Celsia: ";
-            cin >> teplota;
-            cout << teplota << " stupnov Celsius je " << celsiusToFahrenheit(teplota) << " stupnov Fahrenheit." << endl;
+    // Perform the conversion based on user's selection
+    switch (choice) {
+        case 'a': // If the user chooses Celsius to Fahrenheit
+            cout << "Enter the temperature in Celsius: ";
+            cin >> temperature; // Get the temperature in Celsius
+            // Convert and display the result in Fahrenheit
+            cout << temperature << " degrees Celsius is " << celsiusToFahrenheit(temperature) << " degrees Fahrenheit." << endl;
             break;
-        case 'b':
-            cout << "Zadaj teplotu v stupnoch Fahrenheita: ";
-            cin >> teplota;
-            cout << teplota << " stupnov Fahrenheit je " << fahrenheitToCelsius(teplota) << " stupnov Celsius." << endl;
+        case 'b': // If the user chooses Fahrenheit to Celsius
+            cout << "Enter the temperature in Fahrenheit: ";
+            cin >> temperature; // Get the temperature in Fahrenheit
+            // Convert and display the result in Celsius
+            cout << temperature << " degrees Fahrenheit is " << fahrenheitToCelsius(temperature) << " degrees Celsius." << endl;
             break;
-        default:
-            cout << "Neplatna volba." << endl;
+        default: // If the user enters an invalid option
+            cout << "Invalid choice." << endl;
             break;
     }
 
-    return 0;
+    return 0; // Exit the program
 }
