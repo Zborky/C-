@@ -3,6 +3,16 @@
 
 using namespace std;
 
+/**
+ * Encrypts a plaintext string using the Caesar cipher with a given shift.
+ *
+ * Parameters:
+ * - plaintext: The plaintext string to be encrypted.
+ * - shift: The number of positions to shift each letter in the alphabet.
+ *
+ * Returns:
+ * - The encrypted ciphertext string.
+ */
 string encryptCaesar(string plaintext, int shift) {
     string ciphertext = "";
     for (char& c : plaintext) {
@@ -15,6 +25,16 @@ string encryptCaesar(string plaintext, int shift) {
     return ciphertext;
 }
 
+/**
+ * Decrypts a ciphertext string using the Caesar cipher with a given shift.
+ *
+ * Parameters:
+ * - ciphertext: The ciphertext string to be decrypted.
+ * - shift: The number of positions to shift each letter in the alphabet.
+ *
+ * Returns:
+ * - The decrypted plaintext string.
+ */
 string decryptCaesar(string ciphertext, int shift) {
     return encryptCaesar(ciphertext, -shift);
 }
@@ -23,21 +43,21 @@ int main() {
     string plaintext;
     int shift;
 
-    // Vloz text na sifru
-    cout << "Vloz slovo na sifru: ";
+    // Get the plaintext from the user
+    cout << "Enter the text to encrypt: ";
     getline(cin, plaintext);
 
-    // Vloz hodnotu sift
-    cout << "Vloz hodnotu sift (integer): ";
+    // Get the shift value from the user
+    cout << "Enter the shift value (integer): ";
     cin >> shift;
 
-    // zasifrovanie
+    // Encrypt the plaintext
     string encryptedText = encryptCaesar(plaintext, shift);
 
-    // rozsifrovanie
+    // Decrypt the ciphertext
     string decryptedText = decryptCaesar(encryptedText, shift);
 
-    // vyysledok
+    // Print the results
     cout << "Original text: " << plaintext << endl;
     cout << "Encrypted text: " << encryptedText << endl;
     cout << "Decrypted text: " << decryptedText << endl;
