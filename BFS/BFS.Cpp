@@ -1,71 +1,66 @@
-#include<iostream>
-#include<vector>
-#include<queue>
+#include <iostream>
+#include <vector>
+#include <queue>
 
 using namespace std;
 
 /**
- * Funkcia BFS prehľadá graf do šírky z východiskového vrcholu a vráti poradie prehľadávaných vrcholov.
- * 
- * Parametre:
- * - graph: Adjacency list reprezentácia grafu, kde graph[u] obsahuje zoznam susedov vrcholu u.
- * - start: Východiskový vrchol pre BFS.
- * 
- * Návratová hodnota:
- * - Vektor vrcholov v poradí, v akom boli navštívené BFS.
+ * This function performs a Breadth-First Search (BFS) on a graph starting from a given vertex and
+ * returns the order in which vertices are visited.
+ *
+ * Parameters:
+ * - graph: An adjacency list representation of the graph, where graph[u] contains a list of neighbors of vertex u.
+ * - start: The starting vertex for the BFS.
+ *
+ * Return value:
+ * - A vector of vertices in the order they were visited by BFS.
  */
+vector<int> BFS(const vector<vector<int>>& graph, int start) {
+    vector<bool> visited(graph.size(), false); // Keep track of visited vertices
+    vector<int> order; // Store the order in which vertices are visited
+    queue<int> q; // Use a queue for BFS
 
-vector<int> BFS(const vector<vector<int>>& graph, int start){
-    vector<int> visited(graph.size(),false);
-    vector<int> order;
-    queue<int> q;
+    visited[start] = true; // Mark the starting vertex as visited
+    q.push(start); // Enqueue the starting vertex
 
-    visited[start] = true;
-    q.push(start);
-
-    while(!q.empty()){
-        int vertex = q.front();
+    while (!q.empty()) {
+        int vertex = q.front(); // Dequeue a vertex
         q.pop();
-        order.push_back(vertex);
+        order.push_back(vertex); // Add the vertex to the order
 
-        for(int neighbor : graph[vertex]){
-            if(!visited[neighbor]){
-                visited[neighbor] = true;
-                q.push(neighbor);
-
+        // Explore all neighbors of the current vertex
+        for (int neighbor : graph[vertex]) {
+            if (!visited[neighbor]) {
+                visited[neighbor] = true; // Mark the neighbor as visited
+                q.push(neighbor); // Enqueue the neighbor
             }
-
         }
-
     }
-    return order;
 
+    return order;
 }
 
-int main(){
-    // Príklad grafu reprezentovaného adjacency listom
+int main() {
+    // Example graph represented as an adjacency list
     vector<vector<int>> graph = {
-        {1, 2},    // susedia vrcholu 0
-        {0, 3, 4}, // susedia vrcholu 1
-        {0, 4},    // susedia vrcholu 2
-        {1, 5},    // susedia vrcholu 3
-        {1, 2, 5}, // susedia vrcholu 4
-        {3, 4}     // susedia vrcholu 5
+        {1, 2}, // Neighbors of vertex 0
+        {0, 3, 4}, // Neighbors of vertex 1
+        {0, 4}, // Neighbors of vertex 2
+        {1, 5}, // Neighbors of vertex 3
+        {1, 2, 5}, // Neighbors of vertex 4
+        {3, 4} // Neighbors of vertex 5
     };
 
-    //Vychodiskovy vrchol
-
+    // Starting vertex
     int startVertex = 0;
 
     vector<int> bfsOrder = BFS(graph, startVertex);
 
-    cout << "Poradie navstivenych vrcholov ";
-
-    for(int vertex : bfsOrder){
-        cout << vertex << "";
-
+    cout << "Order of visited vertices: ";
+    for (int vertex : bfsOrder) {
+        cout << vertex << " ";
     }
-        cout << endl;
-        return 0;
+    cout << endl;
 
+    return 0;
 }
