@@ -1,2 +1,2 @@
-# C-
-My CPP Junior CPP portfolio
+# C++
+My CPP portfolio
